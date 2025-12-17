@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ave Deeplink Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #020617;
+      border-radius: 16px;
+      padding: 32px 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.4);
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    p {
+      font-size: 14px;
+      color: #94a3b8;
+      margin-bottom: 24px;
+    }
+    button {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #22d3ee, #38bdf8);
+      color: #020617;
+      font-weight: 600;
+    }
+    .fallback {
+      margin-top: 16px;
+      font-size: 12px;
+      color: #64748b;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Ave Deeplink 测试</h1>
+    <p>点击按钮，跳转到 App 内的永续 K 线页面</p>
+
+    <button onclick="openApp()">打开 Ave App</button>
+
+    <div class="fallback" id="fallback">
+      如果未成功跳转，请确认已安装 Ave App
+    </div>
+  </div>
+
+  <script>
+    const deeplink = "ave://link.ave.ai/perp_kline?id=12";
+
+    function openApp() {
+      const start = Date.now();
+      window.location.href = deeplink;
+
+      setTimeout(() => {
+        if (Date.now() - start < 1500) {
+          document.getElementById('fallback').style.display = 'block';
+        }
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
